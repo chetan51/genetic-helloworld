@@ -1,5 +1,5 @@
 class Chromosome
-	@target: "Hello, world!"
+	@target: "Learning is not attained by chance, it must be sought for with ardor and diligence."
 
 	constructor: ->
 		# Compose random string of target length
@@ -75,7 +75,7 @@ class Population
 		@sort()
 		@kill(20)
 		@mate(10)
-		@mutate(25)
+		@mutate(20)
 		@sort()
 
 

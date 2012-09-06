@@ -5,7 +5,7 @@
 
   Chromosome = (function() {
 
-    Chromosome.target = "Hello, world!";
+    Chromosome.target = "Learning is not attained by chance, it must be sought for with ardor and diligence.";
 
     function Chromosome() {
       this.mutate = __bind(this.mutate, this);
@@ -116,7 +116,7 @@
       this.sort();
       this.kill(20);
       this.mate(10);
-      this.mutate(25);
+      this.mutate(20);
       return this.sort();
     };
 
