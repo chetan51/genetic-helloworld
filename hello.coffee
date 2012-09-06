@@ -23,10 +23,12 @@ class Chromosome
 		# Choose an index in the middle of the chromosomes to pivot around
 		index = Chromosome.target.length / 2
 
-		# Create a new child
-		child = new Chromosome
-		child.code = @code.substr(0, index) + chromosome.code.substr(index)
-		return child
+		# Create two new children
+		child1 = new Chromosome
+		child1.code = @code.substr(0, index) + chromosome.code.substr(index)
+		child2 = new Chromosome
+		child2.code = chromosome.code.substr(0, index) + @code.substr(index)
+		return [child1, child2]
 
 	cost: ->
 		total = 0
@@ -56,7 +58,7 @@ class Population
 		for i in [0...n]
 			c1 = @chromosomes[i]
 			c2 = @chromosomes[i + 1]
-			children.push(c1.mate(c2))
+			children.push(c1.mate(c2)...)
 		@chromosomes.push(children...)
 
 	mutate: (n) ->
@@ -72,14 +74,15 @@ class Population
 	evolve: ->
 		@sort()
 		@kill(20)
-		@mate(20)
+		@mate(10)
 		@mutate(25)
+		@sort()
 
 
 ## Main
 ## ####
 display = (n) ->
-	console.log "Generation " + i + ":\t\t" + p.chromosomes[0].code
+	console.log "Generation " + i + " (" + p.score() + "):\t\t" + p.chromosomes[0].code
 p = new Population
 i = 0
 display(i)

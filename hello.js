@@ -34,11 +34,13 @@
     };
 
     Chromosome.prototype.mate = function(chromosome) {
-      var child, index;
+      var child1, child2, index;
       index = Chromosome.target.length / 2;
-      child = new Chromosome;
-      child.code = this.code.substr(0, index) + chromosome.code.substr(index);
-      return child;
+      child1 = new Chromosome;
+      child1.code = this.code.substr(0, index) + chromosome.code.substr(index);
+      child2 = new Chromosome;
+      child2.code = chromosome.code.substr(0, index) + this.code.substr(index);
+      return [child1, child2];
     };
 
     Chromosome.prototype.cost = function() {
@@ -91,7 +93,7 @@
       for (i = _i = 0; 0 <= n ? _i < n : _i > n; i = 0 <= n ? ++_i : --_i) {
         c1 = this.chromosomes[i];
         c2 = this.chromosomes[i + 1];
-        children.push(c1.mate(c2));
+        children.push.apply(children, c1.mate(c2));
       }
       return (_ref = this.chromosomes).push.apply(_ref, children);
     };
@@ -113,8 +115,9 @@
     Population.prototype.evolve = function() {
       this.sort();
       this.kill(20);
-      this.mate(20);
-      return this.mutate(25);
+      this.mate(10);
+      this.mutate(25);
+      return this.sort();
     };
 
     return Population;
@@ -122,7 +125,7 @@
   })();
 
   display = function(n) {
-    return console.log("Generation " + i + ":\t\t" + p.chromosomes[0].code);
+    return console.log("Generation " + i + " (" + p.score() + "):\t\t" + p.chromosomes[0].code);
   };
 
   p = new Population;
