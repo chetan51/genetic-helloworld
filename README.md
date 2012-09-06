@@ -17,3 +17,7 @@ Install the [CoffeeScript](http://coffeescript.org/) compiler:
 Then run:
 
 	./run.sh
+
+## Thanks
+
+Inspired by [http://burakkanber.com/blog/machine-learning-genetic-algorithms-part-1-javascript/](http://burakkanber.com/blog/machine-learning-genetic-algorithms-part-1-javascript/).
